@@ -28,12 +28,12 @@ import streamlit as st
 # 
 st.title("Dashboard Sederhana 🚀")
 # 
-st.subheader("Preview Data")
-st.dataframe(data)
+# st.subheader("Preview Data")
+# st.dataframe(data)
 # 
 # # Tambah chart sederhana (ganti sesuai datamu)
-st.subheader("Visualisasi Contoh")
-st.line_chart(data['CABANG'])
+st.subheader("Customer Profile")
+# st.line_chart(data['CABANG'])
 
 # Dropdown untuk CABANG
 selected_cabang = st.selectbox(
@@ -51,8 +51,19 @@ selected_periode = st.selectbox(
 st.write(f"Cabang yang dipilih: **{selected_cabang}**")
 st.write(f"Periode yang dipilih: **{selected_periode}**")
 
-# Filter data sesuai pilihan
-filtered_data = data[(data['CABANG'] == selected_cabang) & (data['PERIODE'] == selected_periode)]
+# Dropdown untuk memilih cabang dan periode
+selected_cabang = st.selectbox("Pilih Cabang", data["CABANG"].unique())
+selected_periode = st.selectbox("Pilih Periode", data["PERIODE"].unique())
 
-# Tampilkan data hasil filter
-st.dataframe(filtered_data)
+# Filter data sesuai pilihan
+filtered_data = data[
+    (data['CABANG'] == selected_cabang) & (data['PERIODE'] == selected_periode)
+]
+
+# Hitung jumlah unik CUSTOMER_NO dan ACCOUNT_NUMBER
+nunique_customer = filtered_data['CUSTOMER_NO'].nunique()
+nunique_account = filtered_data['ACCOUNT_NUMBER'].nunique()
+
+# Tampilkan hasil
+st.metric("Jumlah Customer Unik", nunique_customer)
+st.metric("Jumlah Account Unik", nunique_account)
