@@ -4,6 +4,8 @@ import pandas as pd
 # Load data
 data = pd.read_csv('customer_profile.csv')  # Ganti dengan path/URL data kamu
 
+st.title("Branch Dashboard")
+
 # Dropdown untuk CABANG
 selected_cabang = st.selectbox(
     'Pilih Cabang:',
