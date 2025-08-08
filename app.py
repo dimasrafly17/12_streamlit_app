@@ -10,8 +10,6 @@ Original file is located at
 from google.colab import drive
 drive.mount('/content/drive')
 
-!pip install --upgrade gspread oauth2client
-
 import pandas as pd
 
 data = pd.read_csv('/content/drive/MyDrive/Projects/Experiment/12 Streamlit App Dashboard/customer_profile.csv')
@@ -25,8 +23,6 @@ data['DATE_OPEN_CIF_2'] = pd.to_datetime(data['DATE_OPEN_CIF_2'],dayfirst = True
 data.info()
 
 data.DATE_OPEN_CIF_2
-
-!pip install streamlit
 
 # Commented out IPython magic to ensure Python compatibility.
 # %%writefile app.py
