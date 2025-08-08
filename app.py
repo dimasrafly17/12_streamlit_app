@@ -9,7 +9,7 @@ Original file is located at
 
 import pandas as pd
 
-data = pd.read_csv('/content/drive/MyDrive/Projects/Experiment/12 Streamlit App Dashboard/customer_profile.csv')
+data = pd.read_csv('customer_profile.csv')
 data.head()
 
 data.info()
