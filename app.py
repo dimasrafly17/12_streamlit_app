@@ -16,6 +16,10 @@ selected_periode = st.selectbox(
     options=sorted(data['PERIODE'].dropna().unique())
 )
 
+filtered_data = data[
+    (data['CABANG'] == selected_cabang) & (data['PERIODE'] == selected_periode)
+]
+
 # Hitung jumlah unik CUSTOMER_NO dan ACCOUNT_NUMBER
 nunique_customer = filtered_data['CUSTOMER_NO'].nunique()
 nunique_account = filtered_data['ACCOUNT_NUMBER'].nunique()
