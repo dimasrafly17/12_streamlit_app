@@ -47,14 +47,6 @@ selected_periode = st.selectbox(
     options=sorted(data['PERIODE'].dropna().unique())
 )
 
-# Tampilkan hasil pilihan
-# st.write(f"Cabang yang dipilih: **{selected_cabang}**")
-# st.write(f"Periode yang dipilih: **{selected_periode}**")
-
-# Dropdown untuk memilih cabang dan periode
-selected_cabang = st.selectbox("Pilih Cabang", data["CABANG"].unique())
-selected_periode = st.selectbox("Pilih Periode", data["PERIODE"].unique())
-
 # Filter data sesuai pilihan
 filtered_data = data[
     (data['CABANG'] == selected_cabang) & (data['PERIODE'] == selected_periode)
