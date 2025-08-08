@@ -19,7 +19,21 @@ data.describe(include='all')
 data['DATE_OPEN_CIF_2'] = pd.to_datetime(data['DATE_OPEN_CIF_2'],dayfirst = True,errors = 'coerce')
 data.info()
 
-data.DATE_OPEN_CIF_2
+data.DATE_OPEN_CIF_2.head()
+
+
+# Commented out IPython magic to ensure Python compatibility.
+# %%writefile app.py
+import streamlit as st
+# 
+st.title("Dashboard Sederhana 🚀")
+# 
+st.subheader("Preview Data")
+st.dataframe(data)
+# 
+# # Tambah chart sederhana (ganti sesuai datamu)
+st.subheader("Visualisasi Contoh")
+st.line_chart(data['CABANG'])
 
 # Dropdown untuk CABANG
 selected_cabang = st.selectbox(
@@ -42,17 +56,3 @@ filtered_data = data[(data['CABANG'] == selected_cabang) & (data['PERIODE'] == s
 
 # Tampilkan data hasil filter
 st.dataframe(filtered_data)
-
-# Commented out IPython magic to ensure Python compatibility.
-# %%writefile app.py
-# import streamlit as st
-# 
-# st.title("Dashboard Sederhana 🚀")
-# 
-# st.subheader("Preview Data")
-# st.dataframe(data)
-# 
-# # Tambah chart sederhana (ganti sesuai datamu)
-# st.subheader("Visualisasi Contoh")
-# st.line_chart(data['CABANG'])
-
