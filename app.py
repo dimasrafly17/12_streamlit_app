@@ -7,9 +7,6 @@ Original file is located at
     https://colab.research.google.com/drive/1eZKzCEWOIvMHjksa56o13c-vln4qR3Jq
 """
 
-from google.colab import drive
-drive.mount('/content/drive')
-
 import pandas as pd
 
 data = pd.read_csv('/content/drive/MyDrive/Projects/Experiment/12 Streamlit App Dashboard/customer_profile.csv')
