@@ -21,6 +21,28 @@ data.info()
 
 data.DATE_OPEN_CIF_2
 
+# Dropdown untuk CABANG
+selected_cabang = st.selectbox(
+    'Pilih Cabang:',
+    options=sorted(data['CABANG'].dropna().unique())
+)
+
+# Dropdown untuk PERIODE
+selected_periode = st.selectbox(
+    'Pilih Periode:',
+    options=sorted(data['PERIODE'].dropna().unique())
+)
+
+# Tampilkan hasil pilihan
+st.write(f"Cabang yang dipilih: **{selected_cabang}**")
+st.write(f"Periode yang dipilih: **{selected_periode}**")
+
+# Filter data sesuai pilihan
+filtered_data = data[(data['CABANG'] == selected_cabang) & (data['PERIODE'] == selected_periode)]
+
+# Tampilkan data hasil filter
+st.dataframe(filtered_data)
+
 # Commented out IPython magic to ensure Python compatibility.
 # %%writefile app.py
 # import streamlit as st
