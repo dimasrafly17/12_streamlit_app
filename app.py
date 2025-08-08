@@ -55,7 +55,9 @@ filtered_data = data[
 # Hitung jumlah unik CUSTOMER_NO dan ACCOUNT_NUMBER
 nunique_customer = filtered_data['CUSTOMER_NO'].nunique()
 nunique_account = filtered_data['ACCOUNT_NUMBER'].nunique()
+new_cif_count = (filtered_data['NEW_CIF'] == 'Y').sum()
 
 # Tampilkan hasil
 st.metric("Jumlah Customer Unik", nunique_customer)
 st.metric("Jumlah Account Unik", nunique_account)
+st.metric("New CIF", new_cif_count)
