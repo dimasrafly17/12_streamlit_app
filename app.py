@@ -1,8 +1,15 @@
 import streamlit as st
 import pandas as pd
+import time
 
 # Password configuration
 CORRECT_PASSWORD = "your_secret_password_123"  # Ganti dengan password kamu
+SESSION_TIMEOUT = 3600  # 1 hour in seconds (bisa diganti sesuai kebutuhan)
+
+# Force clear session (untuk testing - hapus setelah deploy)
+if st.sidebar.button("🗑️ Force Clear Session (Testing Only)"):
+    st.session_state.clear()
+    st.rerun()
 
 def check_password():
     """Returns `True` if user entered correct password."""
@@ -11,12 +18,19 @@ def check_password():
         """Checks whether password is correct."""
         if st.session_state["password"] == CORRECT_PASSWORD:
             st.session_state["password_correct"] = True
+            st.session_state["login_time"] = time.time()  # Track login time
             del st.session_state["password"]  # Don't store password
         else:
             st.session_state["password_correct"] = False
 
-    # Return True if password is validated
+    # Check if session has expired
     if st.session_state.get("password_correct", False):
+        login_time = st.session_state.get("login_time", 0)
+        if time.time() - login_time > SESSION_TIMEOUT:
+            st.session_state["password_correct"] = False
+            st.session_state.pop("login_time", None)
+            st.warning("⏰ Session expired! Please login again.")
+            return False
         return True
 
     # Show password input
@@ -85,17 +99,22 @@ if check_password():
             with col2:
                 st.metric("🏦 Jumlah Account", nunique_account)
             with col3:
-                st.metric("🆕 NEW CIF", new_cif_count)
+                st.metric("🆕 NEW CIF (Y)", new_cif_count)
             
             # Additional insights
             if nunique_customer > 0:
                 avg_accounts = round(nunique_account / nunique_customer, 2)
                 st.info(f"📈 Rata-rata {avg_accounts} accounts per customer")
                 
-            # Session info
+            # Session info with timeout
+            login_time = st.session_state.get("login_time", 0)
+            time_remaining = SESSION_TIMEOUT - (time.time() - login_time)
+            minutes_remaining = int(time_remaining // 60)
+            
             st.sidebar.success("🔓 Session Active")
             st.sidebar.info(f"📍 Viewing: {selected_cabang}")
             st.sidebar.info(f"📅 Period: {selected_periode}")
+            st.sidebar.info(f"⏱️ Session: {minutes_remaining} min left")
             
         else:
             st.warning("⚠️ Tidak ada data untuk filter yang dipilih")
@@ -111,5 +130,7 @@ if check_password():
     
     # Logout option
     if st.sidebar.button("🚪 Logout"):
-        st.session_state["password_correct"] = False
-        st.experimental_rerun()
+        # Clear all session state
+        for key in st.session_state.keys():
+            del st.session_state[key]
+        st.rerun()  # Updated method name
