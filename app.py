@@ -25,9 +25,11 @@ nunique_customer = filtered_data['CUSTOMER_NO'].nunique()
 nunique_account = filtered_data['ACCOUNT_NUMBER'].nunique()
 new_cif_count = (filtered_data['NEW_CIF'] == 'Y').sum()
 new_acct_count = (filtered_data['NEW_REK'] == 'Y').sum()
+fum = filtered_data['FUM'].sum()
 
 # Tampilkan hasil
 st.metric("Total CIF", nunique_customer)
 st.metric("Total Account", nunique_account)
 st.metric("New CIF", new_cif_count)
 st.metric("New REK", new_acct_count)
+st.metric("Total FUM", fum)
