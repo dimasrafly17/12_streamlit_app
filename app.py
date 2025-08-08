@@ -26,7 +26,7 @@ data.DATE_OPEN_CIF_2.head()
 # %%writefile app.py
 import streamlit as st
 # 
-st.title("Dashboard Sederhana 🚀")
+st.title("Branch Dashboard")
 # 
 # st.subheader("Preview Data")
 # st.dataframe(data)
@@ -48,8 +48,8 @@ selected_periode = st.selectbox(
 )
 
 # Tampilkan hasil pilihan
-st.write(f"Cabang yang dipilih: **{selected_cabang}**")
-st.write(f"Periode yang dipilih: **{selected_periode}**")
+# st.write(f"Cabang yang dipilih: **{selected_cabang}**")
+# st.write(f"Periode yang dipilih: **{selected_periode}**")
 
 # Dropdown untuk memilih cabang dan periode
 selected_cabang = st.selectbox("Pilih Cabang", data["CABANG"].unique())
