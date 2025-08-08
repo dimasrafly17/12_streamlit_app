@@ -4,7 +4,7 @@ import time
 
 # Password configuration
 CORRECT_PASSWORD = "your_secret_password_123"  # Ganti dengan password kamu
-SESSION_TIMEOUT = 3600  # 1 hour in seconds (bisa diganti sesuai kebutuhan)
+SESSION_TIMEOUT = 10  # 1 hour in seconds (bisa diganti sesuai kebutuhan)
 
 # Force clear session (untuk testing - hapus setelah deploy)
 if st.sidebar.button("🗑️ Force Clear Session (Testing Only)"):
